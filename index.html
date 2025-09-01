@@ -359,8 +359,75 @@
                         store.createIndex('date', 'date', { unique: false });
                         store.createIndex('type', 'type', { unique: false });
                         store.createIndex('category', 'category', { unique: false });
+                        
+                        // Adicionar dados de demonstração quando o banco for criado pela primeira vez
+                        addDemoData(store);
                     }
                 };
+            });
+        }
+        
+        // Adicionar dados de demonstração
+        function addDemoData(store) {
+            const today = new Date();
+            const currentMonth = today.getMonth() + 1;
+            const currentYear = today.getFullYear();
+            
+            // Dados de demonstração
+            const demoTransactions = [
+                {
+                    type: 'receita',
+                    amount: 3500.00,
+                    category: 'Salário',
+                    date: `${currentYear}-${String(currentMonth).padStart(2, '0')}-05`,
+                    description: 'Salário mensal',
+                    createdAt: new Date()
+                },
+                {
+                    type: 'receita',
+                    amount: 1200.00,
+                    category: 'Freelance',
+                    date: `${currentYear}-${String(currentMonth).padStart(2, '0')}-15`,
+                    description: 'Projeto cliente X',
+                    createdAt: new Date()
+                },
+                {
+                    type: 'despesa',
+                    amount: -850.00,
+                    category: 'Moradia',
+                    date: `${currentYear}-${String(currentMonth).padStart(2, '0')}-10`,
+                    description: 'Aluguel',
+                    createdAt: new Date()
+                },
+                {
+                    type: 'despesa',
+                    amount: -320.00,
+                    category: 'Alimentação',
+                    date: `${currentYear}-${String(currentMonth).padStart(2, '0')}-12`,
+                    description: 'Supermercado',
+                    createdAt: new Date()
+                },
+                {
+                    type: 'despesa',
+                    amount: -150.00,
+                    category: 'Transporte',
+                    date: `${currentYear}-${String(currentMonth).padStart(2, '0')}-18`,
+                    description: 'Combustível',
+                    createdAt: new Date()
+                },
+                {
+                    type: 'despesa',
+                    amount: -89.90,
+                    category: 'Lazer',
+                    date: `${currentYear}-${String(currentMonth).padStart(2, '0')}-20`,
+                    description: 'Cinema e jantar',
+                    createdAt: new Date()
+                }
+            ];
+            
+            // Adicionar transações de demonstração
+            demoTransactions.forEach(transaction => {
+                store.add(transaction);
             });
         }
         
